@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres Ser Mi San Valentin?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-image: url('file:///C:/Users/DELL/Desktop/Sanvalentin.jpeg'); /* Reemplaza esta URL con la imagen que desees */
+            background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+            background-position: center; /* Centra la imagen en la pantalla */
+            background-attachment: fixed; /* Fija la imagen al fondo, sin que se mueva al hacer scroll */
+            color: white; /* Cambia el color del texto para que se vea bien sobre el fondo */
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative; /* Hace que los botones se muestren por encima del video */
+            z-index: 2;
+        }
+        #si {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #no {
+            background-color: #f44336; /* Rojo */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #video {
+            position: absolute; /* Coloca el video de manera absoluta */
+            top: 0;
+            left: 0;
+            width: 100%; /* Hace que el video ocupe todo el ancho de la pantalla */
+            height: 100%; /* Hace que el video ocupe toda la altura de la pantalla */
+            object-fit: cover; /* Hace que el video cubra todo el área sin deformarse */
+            z-index: 1; /* Coloca el video detrás de los botones */
+            display: none; /* Inicialmente el video no se muestra */
+        }
+        #respuesta {
+            position: absolute; /* El texto se posicionará sobre el video */
+            top: 50%; /* Centra verticalmente el texto */
+            left: 50%; /* Centra horizontalmente el texto */
+            transform: translate(-50%, -50%); /* Ajusta la posición para que quede centrado */
+            font-size: 30px;
+            z-index: 2; /* Asegura que el texto esté por encima del video */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Quieres Ser Mi San Valentin?</h1>
+
+    <button id="si" onclick="respuesta('Sí')">Sí</button>
+    <button id="no" onclick="cambiarNo()">No</button>
+
+    <p id="respuesta"></p>
+
+    <!-- Video que se reproduce cuando se presiona "Sí" -->
+    <video id="video" controls>
+    <source src="file:///C:/Users/DELL/Desktop/sanvalentin4.mp4" type="video/mp4">
+    Tu navegador no soporta el formato de video.
+    </video>
+
+
+    <script>
+        function respuesta(opcion) {
+            document.getElementById("respuesta").innerHTML = "Perfecto, Nos Vemos Este 14, Hermosa, Te Amoooo. ";
+
+                // Si el usuario hace clic en "Sí", mostrar y reproducir el video
+                if (opcion === "Sí") {
+                const video = document.getElementById("video");
+                video.style.display = "block"; // Mostrar el video
+                video.play(); // Reproducir el video
+            }
+        }
+
+        let noClicks = 0;
+        const noBoton = document.getElementById("no");
+        const respuestasNo = [
+            "¿Estás segura?", 
+            "¿Segurísima?", 
+            "Piénsalo otra vez", 
+            "¿De verdad?", 
+            "¿Estás completamente segura?", 
+            "¡No lo hagas!",
+            "Samahi, Por favor elige Si",
+            "Piensa de nuevo",
+            "Se me acaban las opciones",
+            "Si no me amas picale que no"
+        ];
+
+        const fondos = [
+            'file:///C:/Users/DELL/Desktop/sanvalentin2.jpeg', 
+            'file:///C:/Users/DELL/Desktop/sanvalentin3.jpeg', 
+            'file:///C:/Users/DELL/Desktop/sanvalentin7.jpeg',
+            'file:///C:/Users/DELL/Desktop/sanvalentin6.jpeg',
+            'file:///C:/Users/DELL/Desktop/sanvalentin5.jpeg'
+        ];
+
+
+        function cambiarNo() {
+            if (noClicks < respuestasNo.length) {
+                noBoton.textContent = respuestasNo[noClicks];
+                noClicks++;
+            } else {
+                noBoton.textContent = "Bai, Ya no hay boton de No"; // Volver a la opción original después de agotar las respuestas
+            }
+
+            // Cambiar el fondo de la página aleatoriamente
+            let imagenAleatoria = fondos[Math.floor(Math.random() * fondos.length)];
+            document.body.style.backgroundImage = `url(${imagenAleatoria})`;
+        }
+    </script>
+
+</body>
+</html>
